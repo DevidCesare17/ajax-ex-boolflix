@@ -1,29 +1,156 @@
+/* GENERAL */
 *{
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
 ul{
   list-style: none;
 }
 
-.searching_cont{
-  margin: 30px;
+.d_flex{
+  display: flex;
 }
 
+.container{
+  width: 90%;
+  margin:auto;
+  padding: 20px 0;
+}
+
+.marg_bot_10{
+  margin-bottom: 10px;
+}
+/* /GENERAL */
+
+/* HEADER */
+.header_section{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 125px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  padding: 20px;
+}
+
+.website_title h2{
+  color: #F40612;
+}
+
+.searching_cont label{
+  color: #ffffff;
+  font-size: 18px;
+}
+
+input.search_movie{
+  padding: 3px 5px;
+  margin: 0 10px;
+  outline: none;
+}
+input.search_movie::placeholder{
+  color: #B1B1B1;
+}
+
+.search_btn{
+  padding: 3px 20px;
+  background-color: #F40612;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+}
+.search_btn:hover{
+  background-color: #000000;
+}
+/* /HEADER */
+
+/* MAIN */
+.main_section{
+  background-color: #181818;
+  height: calc(100vh - 125px);
+  margin-top: 125px;
+  overflow-y: auto;
+}
+
+.movie_section{
+  height: 50%;
+  overflow-x: auto;
+  margin-bottom: 50px;
+}
+.movie_section h2{
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.tvseries_section{
+  height: 50%;
+  overflow-x: auto;
+}
+.tvseries_section h2{
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+/* /MAIN */
+
+/* TEMPLATE */
+/* sezione film */
 #movie_list>li{
-  margin-bottom: 20px;
-  margin-left: 30px;
+  position: relative;
+  background-color: #000000;
+  width: 342px;
 }
-
-#vote_list li{
-  display: inline;
+#movie_list>li:not(:last-child){
+  margin-right: 20px;
 }
+#movie_list>li:hover .hover_info{
+  display: block;
+}
+/* /sezione film */
 
+/* sezione serie tv */
 #tvseries_list>li{
-  margin-bottom: 20px;
-  margin-left: 30px;
+  position: relative;
+  background-color: #000000;
+}
+#tvseries_list>li:not(:last-child){
+  margin-right: 20px;
+}
+#tvseries_list>li:hover .hover_info{
+  display: block;
+}
+/* /sezione serie tv */
+.img_movie{
+  width: 342px;
+}
+
+.hover_info{
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  cursor: pointer;
+}
+.hover_info span{
+  font-size: 16px;
+  font-weight: 300;
 }
 
 #language{
@@ -45,3 +172,19 @@ i.fa-star{
 i.fas.fa-star{
   color: #FFFF00;
 }
+
+p.overview{
+font-size: 14px;
+}
+/* /TEMPLATE */
+
+/* SCROLLBAR CUSTOM */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #B1B1B1;
+  border-radius: 10px;
+}
+/* /SCROLLBAR CUSTOM */

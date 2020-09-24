@@ -1,25 +1,30 @@
 $(document).ready(function(){
 
-  var btnSrc = $(".search_btn");
-  btnSrc.click(
-    function() {
-      clearAll();
-      searchMovie();
-      searchTvSeries();
-      $(".search_movie").val("");
-    }
-  );
-
-  $(".search_movie").keydown(
-    function(e) {
-      if (e.which == 13) {
+  if ($(".search_movie") != "") {
+    var btnSrc = $(".search_btn");
+    btnSrc.click(
+      function() {
         clearAll();
         searchMovie();
         searchTvSeries();
         $(".search_movie").val("");
       }
-    }
-  );
+    );
+
+    $(".search_movie").keydown(
+      function(e) {
+        if (e.which == 13) {
+          clearAll();
+          searchMovie();
+          searchTvSeries();
+          $(".search_movie").val("");
+        }
+      }
+    );
+  }
+
+  scrllMovie();
+  scrllTV();
 
 });
 
@@ -114,15 +119,31 @@ function renderResults(type, dataRes) {
       "original_title" : original_title,
       "language" : language,
       "vote" : vote,
-      "poster_path": posterPath
+      "poster_path": posterPath,
+      "overview" : dataRes[i].overview
     };
     var html = template(context);
     container.append(html);
   }
 }
 
-//funzione clear campi list
+// funzione clear campi list
 function clearAll() {
   $("#movie_list").html("");
   $("#tvseries_list").html("");
+}
+
+function scrllMovie () {
+  $('.movie_section').mousewheel(function(e, delta) {
+    this.scrollLeft -= (delta * 80);
+    this.scrollRight -= (delta * 80);
+    e.preventDefault();
+  });
+}
+function scrllTV() {
+  $('.tvseries_section').mousewheel(function(e, delta) {
+    this.scrollLeft -= (delta * 80);
+    this.scrollRight -= (delta * 80);
+    e.preventDefault();
+  });
 }
