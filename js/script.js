@@ -135,15 +135,15 @@ function clearAll() {
 
 function scrllMovie () {
   $('.movie_section').mousewheel(function(e, delta) {
-    this.scrollLeft -= (delta * 80);
-    this.scrollRight -= (delta * 80);
+    this.scrollLeft -= (delta * 150);
+    this.scrollRight -= (delta * 150);
     e.preventDefault();
   });
 }
 function scrllTV() {
   $('.tvseries_section').mousewheel(function(e, delta) {
-    this.scrollLeft -= (delta * 80);
-    this.scrollRight -= (delta * 80);
+    this.scrollLeft -= (delta * 150);
+    this.scrollRight -= (delta * 150);
     e.preventDefault();
   });
 }
