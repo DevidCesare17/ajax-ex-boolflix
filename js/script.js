@@ -3,6 +3,7 @@ $(document).ready(function(){
   var btnSrc = $(".search_btn");
   btnSrc.click(
     function() {
+      clearAll();
       searchMovie();
       searchTvSeries();
       $(".search_movie").val("");
@@ -12,6 +13,7 @@ $(document).ready(function(){
   $(".search_movie").keydown(
     function(e) {
       if (e.which == 13) {
+        clearAll();
         searchMovie();
         searchTvSeries();
         $(".search_movie").val("");
@@ -56,33 +58,13 @@ function searchMovie() {
       "method" : "GET",
       "success" : function(data) {
         var dataResults = data.results;
-        tempMovie(dataResults);
+        renderResults("movie", dataResults);
       },
       "error" : function(error) {
         alert("ERRORE!");
       }
     }
   );
-}
-//funzione template lista film
-function tempMovie(dataRes) {
-  $("#movie_list").html("");
-  var source = $("#movie_template").html();
-  var template = Handlebars.compile(source);
-
-  for (var i = 0; i < dataRes.length; i++) {
-    var language = languageFlag(dataRes[i].original_language);
-    var vote = voteMovieMath(dataRes[i].vote_average);
-
-    var context = {
-      "title" : dataRes[i].title,
-      "original_title" : dataRes[i].original_title,
-      "language" : language,
-      "vote" : vote
-    };
-    var html = template(context);
-    $("#movie_list").append(html);
-  }
 }
 
 //funzione cerca serie tv
@@ -100,7 +82,7 @@ function searchTvSeries() {
       "method" : "GET",
       "success" : function(data) {
         var dataResults = data.results;
-        tempTvSeries(dataResults);
+        renderResults("tvseries", dataResults);
       },
       "error" : function(error) {
         alert("ERRORE!");
@@ -108,23 +90,40 @@ function searchTvSeries() {
     }
   );
 }
-//funzione template lista serie tv
-function tempTvSeries(dataRes) {
-  $("#tvseries_list").html("");
-  var source = $("#tvseries_template").html();
+
+//funzione template lista film
+function renderResults(type, dataRes) {
+
+  var source = $("#movie_template").html();
   var template = Handlebars.compile(source);
 
   for (var i = 0; i < dataRes.length; i++) {
     var language = languageFlag(dataRes[i].original_language);
     var vote = voteMovieMath(dataRes[i].vote_average);
+    var title, original_title, container;
+    if (type == "movie") {
+      title = dataRes[i].title;
+      original_title = dataRes[i].original_title;
+      container = $("#movie_list");
+    } else if (type == "tvseries") {
+      title = dataRes[i].name;
+      original_title = dataRes[i].original_name;
+      container = $("#tvseries_list");
+    }
 
     var context = {
-      "name" : dataRes[i].name,
-      "original_name" : dataRes[i].original_name,
+      "title" : title,
+      "original_title" : original_title,
       "language" : language,
-      "vote" : vote
+      "vote" : vote,
+      "poster_path": dataRes[i].poster_path
     };
     var html = template(context);
-    $("#tvseries_list").append(html);
+    container.append(html);
   }
+}
+
+function clearAll() {
+  $("#movie_list").html("");
+  $("#tvseries_list").html("");
 }
