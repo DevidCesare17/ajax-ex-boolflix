@@ -21,26 +21,32 @@
 
     </ul>
 
+    <ul id="tvseries_list">
+
+    </ul>
+
     <script id="movie_template" type="text/x-handlebars-template">
       <li>
         <h3>Titolo: {{title}}</h3>
         <h4>Titolo originale: {{original_title}}</h4>
-        <p id="language">Lingua originale:
-          <span class="flag_img">
-            <!-- {{language}} -->
-            <!-- <img src="https://www.countryflags.io/{{language}}/flat/32.png" alt=""> -->
-          </span>
-        </p>
-        <ul class="vote_list">
-          <li>Media voto:</li>
-          <li><i class="far fa-star"></i></li>
-          <li><i class="far fa-star"></i></li>
-          <li><i class="far fa-star"></i></li>
-          <li><i class="far fa-star"></i></li>
-          <li><i class="far fa-star"></i></li>
-        </ul>
+        <div id="language">Lingua originale:
+          <div class="flag_img"></div>
+        </div>
+        <p id="vote_list">Media voti: {{{vote}}}</p>
       </li>
     </script>
+
+    <script id="tvseries_template" type="text/x-handlebars-template">
+      <li>
+        <h3>Titolo: {{name}}</h3>
+        <h4>Titolo originale: {{original_name}}</h4>
+        <div id="language">Lingua originale:
+          <div class="flag_img"></div>
+        </div>
+        <p id="vote_list">Media voti: {{{vote}}}</p>
+      </li>
+    </script>
+
 
     <script src="js/script.js" charset="utf-8"></script>
   </body>
