@@ -23,11 +23,6 @@ $(document).ready(function(){
 
 });
 
-//funzione aggiunta bandiera
-function languageFlag(language) {
-  return $(".flag_img").html("<img src='https://www.unknown.nu/flags/images/"+language+"-100'>");
-}
-
 //funzione arrotondamento dei voti e aggiunta stelle
 function voteMovieMath(voteOfI) {
   var voteFinal = parseInt(Math.ceil(voteOfI / 2));
@@ -42,6 +37,7 @@ function voteMovieMath(voteOfI) {
   }
   return starsComplete;
 }
+
 
 //funzione cerca film
 function searchMovie() {
@@ -98,8 +94,10 @@ function renderResults(type, dataRes) {
   var template = Handlebars.compile(source);
 
   for (var i = 0; i < dataRes.length; i++) {
-    var language = languageFlag(dataRes[i].original_language);
+    var language = dataRes[i].original_language;
     var vote = voteMovieMath(dataRes[i].vote_average);
+    var posterPath = dataRes[i].poster_path;
+
     var title, original_title, container;
     if (type == "movie") {
       title = dataRes[i].title;
@@ -116,13 +114,14 @@ function renderResults(type, dataRes) {
       "original_title" : original_title,
       "language" : language,
       "vote" : vote,
-      "poster_path": dataRes[i].poster_path
+      "poster_path": posterPath
     };
     var html = template(context);
     container.append(html);
   }
 }
 
+//funzione clear campi list
 function clearAll() {
   $("#movie_list").html("");
   $("#tvseries_list").html("");

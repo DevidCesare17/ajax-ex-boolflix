@@ -21,6 +21,7 @@
     <ul id="movie_list">
 
     </ul>
+
     <h2>Serie TV</h2>
     <ul id="tvseries_list">
 
@@ -29,12 +30,14 @@
     <script id="movie_template" type="text/x-handlebars-template">
       <li>
         <div class="img_movie">
-          <img src="https://image.tmdb.org/t/p/w185{{poster_path}}" alt="">
+          <img src="https://image.tmdb.org/t/p/w154{{poster_path}}" alt="">
         </div>
         <h3>Titolo: {{title}}</h3>
         <h4>Titolo originale: {{original_title}}</h4>
         <div id="language">Lingua originale:
-          <div class="flag_img"></div>
+          <div class="flag_img">
+            <img src="https://www.unknown.nu/flags/images/{{language}}-100" alt="">
+          </div>
         </div>
         <p id="vote_list">Media voti: {{{vote}}}</p>
       </li>
