@@ -47,49 +47,55 @@ function voteMovieMath(voteOfI) {
 //funzione cerca film
 function searchMovie() {
   var search = $(".search_movie").val().toLowerCase();
-  $.ajax(
-    {
-      "url" : "https://api.themoviedb.org/3/search/movie",
-      "data" : {
-        "api_key" : "8c29c10b1dce143e07a26dc3b69c6abc",
-        "query" : search,
-        "language" : "it-IT",
-        "include_adult": false
-      },
-      "method" : "GET",
-      "success" : function(data) {
-        var dataResults = data.results;
-        renderResults("movie", dataResults);
-      },
-      "error" : function(error) {
-        alert("ERRORE!");
+    if (search != "") {
+    $.ajax(
+      {
+        "url" : "https://api.themoviedb.org/3/search/movie",
+        "data" : {
+          "api_key" : "8c29c10b1dce143e07a26dc3b69c6abc",
+          "query" : search,
+          "language" : "it-IT",
+          "include_adult": false
+        },
+        "method" : "GET",
+        "success" : function(data) {
+          var dataResults = data.results;
+          renderResults("movie", dataResults);
+        },
+        "error" : function(error) {
+          alert("ERRORE!");
+        }
       }
-    }
-  );
+    );
+  } else {
+    alert("Inserisci un titolo!");
+  }
 }
 
 //funzione cerca serie tv
 function searchTvSeries() {
   var search = $(".search_movie").val().toLowerCase();
-  $.ajax(
-    {
-      "url" : "https://api.themoviedb.org/3/search/tv",
-      "data" : {
-        "api_key" : "8c29c10b1dce143e07a26dc3b69c6abc",
-        "query" : search,
-        "language" : "it-IT",
-        "include_adult": false
-      },
-      "method" : "GET",
-      "success" : function(data) {
-        var dataResults = data.results;
-        renderResults("tvseries", dataResults);
-      },
-      "error" : function(error) {
-        alert("ERRORE!");
+  if (search != "") {
+    $.ajax(
+      {
+        "url" : "https://api.themoviedb.org/3/search/tv",
+        "data" : {
+          "api_key" : "8c29c10b1dce143e07a26dc3b69c6abc",
+          "query" : search,
+          "language" : "it-IT",
+          "include_adult": false
+        },
+        "method" : "GET",
+        "success" : function(data) {
+          var dataResults = data.results;
+          renderResults("tvseries", dataResults);
+        },
+        "error" : function(error) {
+          alert("ERRORE!");
+        }
       }
-    }
-  );
+    );
+  }
 }
 
 //funzione template lista film
@@ -133,6 +139,7 @@ function clearAll() {
   $("#tvseries_list").html("");
 }
 
+// funzione scroll orizzontale sezioni film e serie tv
 function scrllMovie () {
   $('.movie_section').mousewheel(function(e, delta) {
     this.scrollLeft -= (delta * 150);
