@@ -172,7 +172,7 @@ font-size: 14px;
 }
 /* /TEMPLATE */
 
-/* SCROLLBAR CUSTOM */
+/* SCROLLBAR CUSTOM (NO firefox) */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;

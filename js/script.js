@@ -107,7 +107,11 @@ function renderResults(type, dataRes) {
   for (var i = 0; i < dataRes.length; i++) {
     var language = dataRes[i].original_language;
     var vote = voteMovieMath(dataRes[i].vote_average);
-    var posterPath = dataRes[i].poster_path;
+    if(dataRes[i].poster_path == null) {
+      var posterPath = "img/no_poster.png";
+    } else {
+      var posterPath = "https://image.tmdb.org/t/p/w342" + dataRes[i].poster_path;
+    }
 
     var title, original_title, container;
     if (type == "movie") {
