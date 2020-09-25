@@ -43,11 +43,10 @@ function voteMovieMath(voteOfI) {
   return starsComplete;
 }
 
-
 //funzione cerca film
 function searchMovie() {
   var search = $(".search_movie").val().toLowerCase();
-    if (search != "") {
+    if ((search != "") && (search.length > 2)) {
     $.ajax(
       {
         "url" : "https://api.themoviedb.org/3/search/movie",
@@ -60,7 +59,11 @@ function searchMovie() {
         "method" : "GET",
         "success" : function(data) {
           var dataResults = data.results;
+          if (dataResults == 0) {
+            $("#movie_list").html("Nessun film trovato").addClass("notfound");
+          } else {
           renderResults("movie", dataResults);
+          }
         },
         "error" : function(error) {
           alert("ERRORE!");
@@ -75,7 +78,7 @@ function searchMovie() {
 //funzione cerca serie tv
 function searchTvSeries() {
   var search = $(".search_movie").val().toLowerCase();
-  if (search != "") {
+  if ((search != "") && (search.length > 2)) {
     $.ajax(
       {
         "url" : "https://api.themoviedb.org/3/search/tv",
@@ -88,7 +91,11 @@ function searchTvSeries() {
         "method" : "GET",
         "success" : function(data) {
           var dataResults = data.results;
+          if (dataResults == 0) {
+            $("#tvseries_list").html("Nessuna serie TV trovata").addClass("notfound");
+          } else {
           renderResults("tvseries", dataResults);
+          }
         },
         "error" : function(error) {
           alert("ERRORE!");
